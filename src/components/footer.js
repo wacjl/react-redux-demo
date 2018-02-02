@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 export default class Footer extends React.PureComponent{
 	render(){
 		let  arr=[];
@@ -8,6 +9,7 @@ export default class Footer extends React.PureComponent{
 		return (
 			<footer>
 				{arr}
+				<Link to='/project'>go to project</Link>
 			</footer>
 		)
 	}

@@ -14,6 +14,9 @@ export function fetchTask(){
     }
 `).then(result => {
    return  result.fetchTasks
+},error=>{
+	
+	return "fail"
 });
 }
 
@@ -32,5 +35,8 @@ export function getTaskP(id){
 	const vars = {id};
 	return client.query(query, vars).then(result => {
 	  return result.getTask
-	});
+	},error=>{
+	
+	return "fail"
+});
 }

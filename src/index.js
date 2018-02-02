@@ -1,15 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
-import Project from './container/project'
+/*import App from './App';*/
+/*import Project from './container/project'*/
 import registerServiceWorker from './registerServiceWorker';
 import { createStore,applyMiddleware  } from 'redux'
 import thunkMiddleware from 'redux-thunk'
 import todoApp from './reducer'
 import { Provider } from 'react-redux'
-let store = createStore(todoApp,applyMiddleware(thunkMiddleware))
-var Apps=()=>{
+import BasicExample from './router/baseRouter'
+import RouteConfigExample from './router/routeConfig'
+import MainConfig from './router/routeConfigs'
+import reduxRouter from './router/reduxRouter'
+import {ConnectedRouter,routerReducer, routerMiddleware,push} from 'react-router-redux'
+import createHistory from 'history/createBrowserHistory'
+import { renderRoutes } from 'react-router-config'
+const history = createHistory()
+
+let store = createStore(todoApp,applyMiddleware(thunkMiddleware,routerMiddleware(history)))
+/*var Apps=()=>{
 	return (
 		<Provider store={store}>
 		   <div>
@@ -17,8 +26,18 @@ var Apps=()=>{
 		   </div>
 		  </Provider>
 	)
+}*/
+
+const ReduxRouter=()=>{
+	return (
+		<Provider store={store}>
+	    <ConnectedRouter history={history}>
+	     	{renderRoutes(reduxRouter)}
+	    </ConnectedRouter>
+	  </Provider>
+	)
 }
-ReactDOM.render(<Apps/>, document.getElementById('root'));
+ReactDOM.render(<ReduxRouter/>, document.getElementById('root'));
 registerServiceWorker();
 
 /*import React from 'react'
@@ -34,8 +53,8 @@ import {
 import { createStore, applyMiddleware, combineReducers } from 'redux'
 import createHistory from 'history/createBrowserHistory'
 
-import { Route, Switch } from 'react-router'
-import { Redirect } from 'react-router-dom'
+
+import { Redirect ,Route, Switch} from 'react-router-dom'
 
 const history = createHistory()
 

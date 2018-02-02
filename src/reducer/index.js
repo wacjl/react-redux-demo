@@ -22,7 +22,7 @@ function footer(footers=['show_all','show_completed','show_active']){
 function project(state={isRequest:false,item:[]},action){
 	switch(action.type){
 		case REQUEST_PROJECT:
-			return Object.assign({},state,{isRequest:true})
+			return Object.assign({},state,{isRequest:action.isRequest})
 			break;
 		case RECEIVE_PROJECT:
 		return Object.assign({},state,{isRequest:false,item:action.data})

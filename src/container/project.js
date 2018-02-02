@@ -2,6 +2,7 @@ import React from 'react'
  import { connect } from 'react-redux';
  import {isRequestProject,isRequestTaskPro} from '../action'
  import {Button,Spin} from 'antd'
+ import {Link} from 'react-router-dom'
  function List (props){
  	return (
  		<ul>
@@ -46,7 +47,9 @@ import React from 'react'
 				<List data={project.item} click={this.itemClick}/>
 			</Spin>
 				<p>{taskP.name}</p>
+				<Link to="/">go to /</Link>
 			</div>
+			
 		)
 	}
 }

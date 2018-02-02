@@ -39,7 +39,8 @@ export function visiblityFilter(filter){
 
 export function requestProject(isRequest){
 	return {
-		type:REQUEST_PROJECT
+		type:REQUEST_PROJECT,
+		isRequest
 	}
 }
 export function receiveProject(data){
@@ -53,9 +54,10 @@ export function receiveProject(data){
 export function isRequestProject(){
 	return async (dispatch,getState)=>{
 		if(!getState().project.isRequest){
-			dispatch(requestProject());
+			dispatch(requestProject(true));
 			const data= await fetchTask();
-			dispatch(receiveProject(data))
+			data==='fail'?dispatch(requestProject(false)):dispatch(receiveProject(data));
+			
 		}
 	}
 }
