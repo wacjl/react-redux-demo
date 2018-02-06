@@ -16,8 +16,17 @@ import {ConnectedRouter,routerReducer, routerMiddleware,push} from 'react-router
 import createHistory from 'history/createBrowserHistory'
 import { renderRoutes } from 'react-router-config'
 const history = createHistory()
-
-let store = createStore(todoApp,applyMiddleware(thunkMiddleware,routerMiddleware(history)))
+/*console.log(push)*/
+function logMiddleware({ getState, dispatch }){
+	return function(next){
+		return function(action){
+			console.log(getState())
+			next(action)
+			console.log(getState())
+		}
+	}
+}
+let store = createStore(todoApp,applyMiddleware(thunkMiddleware,logMiddleware,routerMiddleware(history)))
 /*var Apps=()=>{
 	return (
 		<Provider store={store}>
@@ -94,6 +103,7 @@ const store = createStore(
 
 class LoginContainer extends React.Component {
   render() {
+  	console.log(this.props)
     return <button onClick={this.props.login}>Login Here!</button>
   }
 }
@@ -104,6 +114,7 @@ class HomeContainer extends React.Component {
   }
 
   render() {
+  	console.log(this.props)
     return <button onClick={this.props.logout}>Logout Here!</button>
   }
 }
@@ -141,14 +152,14 @@ const PrivateRoute = connect(state => ({
 const Login = connect(null, dispatch => ({
   login: () => {
     dispatch(authSuccess())
-    dispatch(push('/'))
+    dispatch(push({pathname:'/',params:1,state:{data:2}}))
   }
 }))(LoginContainer)
 
 const Home = connect(null, dispatch => ({
   logout: () => {
     dispatch(authFail())
-    dispatch(push('/login'))
+    dispatch(push({pathname:'/login',state:{data:2}}))
   }
 }))(HomeContainer)
 
@@ -156,7 +167,7 @@ render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
       <Switch>
-        <Route path="/login" component={Login} />
+        <Route path="/:id" component={Login} />
         <PrivateRoute exact path="/" component={Home} />
       </Switch>
     </ConnectedRouter>

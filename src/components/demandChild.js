@@ -1,7 +1,7 @@
 import { renderRoutes } from 'react-router-config'
 import React from 'react'
 import {Link} from 'react-router-dom'
-const Child = ({ route }) => (
+const Child = ({ route ,match}) => (
   <div>
     <h2>Child</h2>
     <Link to="/child/1/grand-child">child-1-grand-child</Link>

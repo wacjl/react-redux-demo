@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import 'antd/dist/antd.css' 
 import './App.css'
 import { List, Set } from 'immutable';
+import {createSelector } from 'reselect'
 /*const emptyList = List()
 const plainArray = [ 1, 2, 3, 4 ]
 const listFromPlainArray = List(plainArray)
@@ -72,7 +73,7 @@ class App extends Component {
 	    );
 	  }
 }
-function filter(state){
+/*function filter(state){
 	switch(state.visiblity){
 		case 'show_all':return state.todos;break;
 		case 'show_completed':return state.todos.filter((item)=>{
@@ -86,7 +87,25 @@ function filter(state){
 			}
 		});break;
 	}
-}
+}*/
+const  visiblity=(state)=>state.visiblity;
+const  todos=(state)=>state.todos
+const filter=createSelector([visiblity,todos],(visiblity,todos)=>{
+	//console.log(1)
+	switch(visiblity){
+		case 'show_all':return todos;break;
+		case 'show_completed':return todos.filter((item)=>{
+			if(item.complated){
+				return item
+			}
+		});break;
+		case 'show_active' :return todos.filter((item)=>{
+			if(!item.complated){
+				return item
+			}
+		});break;
+	}
+})
 function select(state){
 	return {
 		visiblity:state.visiblity,
