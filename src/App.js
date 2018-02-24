@@ -4,6 +4,7 @@ import 'antd/dist/antd.css'
 import './App.css'
 import { List, Set } from 'immutable';
 import {createSelector } from 'reselect'
+
 /*const emptyList = List()
 const plainArray = [ 1, 2, 3, 4 ]
 const listFromPlainArray = List(plainArray)

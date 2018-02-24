@@ -1,7 +1,7 @@
 import React from 'react'
 import Style from '../css/list.css'
 import classnames from 'classnames'
-
+import PropTypes from 'prop-types'
 class ListItem extends React.PureComponent{
 
 	render(){
@@ -10,6 +10,10 @@ class ListItem extends React.PureComponent{
 		return (<li className={classnames({[Style['li-active']]:props.complated})}  onClick={()=>props.click(props.index)}>{props.text}</li>)
 	}
 }
+ListItem.propTypes={
+	text:PropTypes.string
+}
+
 export default class List extends React.PureComponent{
 	constructor(){
 		super();

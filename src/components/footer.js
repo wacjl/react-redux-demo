@@ -1,6 +1,10 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
-export default class Footer extends React.PureComponent{
+import {Link,withRouter} from 'react-router-dom'
+ class Footer extends React.PureComponent{
+	click(){
+	//	console.log(1)
+		this.props.history.push({pathname:'/project',state:{uu:1}})
+	}
 	render(){
 		let  arr=[];
 		this.props.data.forEach((item)=>{
@@ -9,8 +13,9 @@ export default class Footer extends React.PureComponent{
 		return (
 			<footer>
 				{arr}
-				<Link to='/project'>go to project</Link>
+				<a onClick={()=>{this.click()}}   to='/project'>go to project</a>
 			</footer>
 		)
 	}
 }
+export default withRouter(Footer)

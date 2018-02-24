@@ -13,6 +13,12 @@ import React from 'react'
  		
  	)
  }
+ function Childrens(props){
+ 	//console.log(props)
+ 	return (
+ 		<div>{props.children[0]}</div>
+ 	)
+ }
  
  class Project extends React.PureComponent{
  	constructor(){
@@ -22,6 +28,7 @@ import React from 'react'
  	}
  	componentDidMount(){
  		const {dispatch}=this.props
+ 		console.log(this.props)
  		dispatch(isRequestProject())
  	}
  	request(){
@@ -48,6 +55,10 @@ import React from 'react'
 			</Spin>
 				<p>{taskP.name}</p>
 				<Link to="/">go to /</Link>
+				<Childrens>
+					<p>1</p>
+					<span>2</span>
+				</Childrens>
 			</div>
 			
 		)

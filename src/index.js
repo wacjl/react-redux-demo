@@ -16,17 +16,19 @@ import {ConnectedRouter,routerReducer, routerMiddleware,push} from 'react-router
 import createHistory from 'history/createBrowserHistory'
 import { renderRoutes } from 'react-router-config'
 const history = createHistory()
-/*console.log(push)*/
+//console.log(push)
 function logMiddleware({ getState, dispatch }){
 	return function(next){
 		return function(action){
-			console.log(getState())
+		//	console.log(getState())
 			next(action)
-			console.log(getState())
+			//console.log(getState())
 		}
 	}
 }
+
 let store = createStore(todoApp,applyMiddleware(thunkMiddleware,logMiddleware,routerMiddleware(history)))
+//let store = createStore(todoApp,{visiblity:"show_active"},applyMiddleware(thunkMiddleware,logMiddleware,routerMiddleware(history)))
 /*var Apps=()=>{
 	return (
 		<Provider store={store}>
