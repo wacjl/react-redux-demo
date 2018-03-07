@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import 'antd/dist/antd.css' 
+ 
 import './App.css'
 import { List, Set } from 'immutable';
 import {createSelector } from 'reselect'

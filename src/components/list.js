@@ -7,7 +7,7 @@ class ListItem extends React.PureComponent{
 	render(){
 		const props=this.props;
 			console.log(props.text)
-		return (<li className={classnames({[Style['li-active']]:props.complated})}  onClick={()=>props.click(props.index)}>{props.text}</li>)
+		return (<li className={classnames({[Style['li-active']]:props.complated})}  onClick={(e)=>props.click(props.index,e)}>{props.text}</li>)
 	}
 }
 ListItem.propTypes={
@@ -19,8 +19,13 @@ export default class List extends React.PureComponent{
 		super();
 		this.itemClick=this.itemClick.bind(this)
 	}
-	itemClick(index){
+	itemClick(index,e){
+	e.stopPropagation()
+	//console.log(	e.nativeEvent)
 		this.props.click(index)
+	}
+	ulClick(){
+		console.log('事件冒泡')
 	}
 	render(){
 		var arr=[];
@@ -29,7 +34,7 @@ export default class List extends React.PureComponent{
 			arr.push(<ListItem click={this.itemClick} index={index}  key={index}  {...item}/>)
 		})
 		return (
-			<ul>
+			<ul onClick={this.ulClick}>
 				{arr}
 			</ul>
 		)

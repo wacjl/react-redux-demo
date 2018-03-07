@@ -15,6 +15,8 @@ import reduxRouter from './router/reduxRouter'
 import {ConnectedRouter,routerReducer, routerMiddleware,push} from 'react-router-redux'
 import createHistory from 'history/createBrowserHistory'
 import { renderRoutes } from 'react-router-config'
+import createSagaMiddleware from 'redux-saga'
+import {fetchProject,reFresh} from './saga'
 const history = createHistory()
 //console.log(push)
 function logMiddleware({ getState, dispatch }){
@@ -26,8 +28,13 @@ function logMiddleware({ getState, dispatch }){
 		}
 	}
 }
-
-let store = createStore(todoApp,applyMiddleware(thunkMiddleware,logMiddleware,routerMiddleware(history)))
+function* hello(){
+	console.log('hello')
+}
+var sagaMiddleware=createSagaMiddleware();
+let store = createStore(todoApp,applyMiddleware(sagaMiddleware,thunkMiddleware,logMiddleware,routerMiddleware(history)))
+sagaMiddleware.run(fetchProject)
+sagaMiddleware.run(reFresh)
 //let store = createStore(todoApp,{visiblity:"show_active"},applyMiddleware(thunkMiddleware,logMiddleware,routerMiddleware(history)))
 /*var Apps=()=>{
 	return (
@@ -176,3 +183,16 @@ render(
   </Provider>,
   document.getElementById('root'),
 )*/
+
+/*function* fibonacci() {
+  let [prev, curr] = [0, 1];
+  for (;;) {
+    [prev, curr] = [curr, prev + curr];
+    yield curr;
+  }
+}
+
+for (let n of fibonacci()) {
+  if (n > 1000) break;
+  console.log(n);
+}*/

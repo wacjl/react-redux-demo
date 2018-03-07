@@ -3,6 +3,8 @@ import React from 'react'
  import {isRequestProject,isRequestTaskPro} from '../action'
  import {Button,Spin} from 'antd'
  import {Link} from 'react-router-dom'
+ import {renderRoutes} from 'react-router-config'
+ 
  function List (props){
  	return (
  		<ul>
@@ -24,23 +26,36 @@ import React from 'react'
  	constructor(){
  		super();
  		this.request=this.request.bind(this);
- 		this.itemClick=this.itemClick.bind(this)
+ 		this.itemClick=this.itemClick.bind(this);
+ 		this.routerTest=this.routerTest.bind(this);
  	}
  	componentDidMount(){
  		const {dispatch}=this.props
  		console.log(this.props)
- 		dispatch(isRequestProject())
+ 		//dispatch(isRequestProject())
+ 		dispatch({type:'FETCH_PROJECT'})
  	}
  	request(){
  		const {dispatch}=this.props
- 		dispatch(isRequestProject())
+ 		//dispatch(isRequestProject())
+ 		dispatch({type:'FETCH_TT'})
  	}
  	itemClick(id){
  		const {dispatch}=this.props
  		dispatch(isRequestTaskPro(id))
  	}
+ 	routerTest(){
+ 		console.log(this.props);
+ 		const {history}=this.props;
+ 		history.push({
+ 			pathname:'/project/0',
+ 			params:{id:0},
+ 			query:'?sort=name&y=iii',
+ 			state:{wwew:99}
+ 		})
+ 	}
 	render(){
-		const {project,taskP}=this.props;
+		const {project,taskP,route}=this.props;
 		//console.log(project)
 		return (
 			<div style={{marginTop:'60px'}}>
@@ -59,6 +74,9 @@ import React from 'react'
 					<p>1</p>
 					<span>2</span>
 				</Childrens>
+				<Link to="/project/0">dssa</Link>
+				<span onClick={this.routerTest}>跳转传参测试</span>
+				{renderRoutes(route.routes)}
 			</div>
 			
 		)
