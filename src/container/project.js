@@ -16,9 +16,11 @@ import React from 'react'
  	)
  }
  function Childrens(props){
- 	//console.log(props)
+ 	console.log(React)
  	return (
- 		<div>{props.children[0]}</div>
+ 		<div>{React.Children.map(props.children,(item,index)=>{
+ 			if(index==1){return item}
+ 		})}</div>
  	)
  }
  
@@ -48,8 +50,8 @@ import React from 'react'
  		console.log(this.props);
  		const {history}=this.props;
  		history.push({
- 			pathname:'/project/0',
- 			params:{id:0},
+ 			pathname:'/project/2',
+ 			params:{id:1},
  			query:'?sort=name&y=iii',
  			state:{wwew:99}
  		})

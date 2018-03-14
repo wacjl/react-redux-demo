@@ -6,7 +6,7 @@ function Test(props){
 	console.log(props)
 	return (
 		<div>
-			ee
+			{props.match.params.id}
 		</div>
 	)
 }
